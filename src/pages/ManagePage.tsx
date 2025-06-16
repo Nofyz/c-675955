@@ -1,18 +1,29 @@
 
 import React, { useState } from 'react';
-import { ViewSwitcher } from '@/components/manage/ViewSwitcher';
-import { CortexSidebar } from '@/components/manage/CortexSidebar';
-import { KanbanView } from '@/components/manage/views/KanbanView';
-import { TableView } from '@/components/manage/views/TableView';
+import ViewSwitcher from '@/components/manage/ViewSwitcher';
+import CortexSidebar from '@/components/manage/CortexSidebar';
+import KanbanView from '@/components/manage/views/KanbanView';
+import TableView from '@/components/manage/views/TableView';
 import { mockProjects } from '@/components/manage/cortex-data';
 
 const ManagePage = () => {
   const [currentView, setCurrentView] = useState<'kanban' | 'table'>('kanban');
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
+  const [selectedCategoryId, setSelectedCategoryId] = useState('private');
+  const [selectedItemId, setSelectedItemId] = useState<string | null>('overview');
+
+  const handleCortexSelect = (categoryId: string, itemId: string | null) => {
+    setSelectedCategoryId(categoryId);
+    setSelectedItemId(itemId);
+  };
 
   return (
     <div className="h-screen flex bg-background">
-      <CortexSidebar />
+      <CortexSidebar 
+        onCortexSelect={handleCortexSelect}
+        selectedCategoryId={selectedCategoryId}
+        selectedItemId={selectedItemId}
+      />
       
       <div className="flex-1 flex flex-col overflow-hidden">
         <div className="border-b p-4">
@@ -23,8 +34,8 @@ const ManagePage = () => {
             </div>
             
             <ViewSwitcher 
-              currentView={currentView} 
-              onViewChange={setCurrentView} 
+              activeView={currentView as 'table' | 'grid' | 'list' | 'kanban'} 
+              onViewChange={(view) => setCurrentView(view as 'kanban' | 'table')} 
             />
           </div>
         </div>
@@ -32,15 +43,19 @@ const ManagePage = () => {
         <div className="flex-1 overflow-hidden">
           {currentView === 'kanban' ? (
             <KanbanView 
-              data={mockProjects}
-              selectedItems={selectedItems}
-              onSelectionChange={setSelectedItems}
+              items={mockProjects}
             />
           ) : (
             <TableView 
-              data={mockProjects}
+              items={mockProjects}
               selectedItems={selectedItems}
-              onSelectionChange={setSelectedItems}
+              onSelectItem={(id) => {
+                setSelectedItems(prev => 
+                  prev.includes(id) 
+                    ? prev.filter(item => item !== id)
+                    : [...prev, id]
+                );
+              }}
             />
           )}
         </div>

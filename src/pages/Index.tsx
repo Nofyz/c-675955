@@ -22,21 +22,21 @@ const Index = () => {
     <>
       <LoadingScreen />
       <div className="min-h-screen">
-        <HeroSection />
-        <FeatureSection />
+        <HeroSection showTitle={true} />
+        <FeatureSection showFeatures={true} />
         <UseCasesSection />
-        <DesignSection />
-        <ManageSection />
-        <StatisticsSection />
-        <IntegrationShowcase />
-        <DeploySection />
-        <SecuritySection />
-        <TestimonialsSection />
-        <PricingSection />
-        <BlogSection />
-        <CommunitySection />
+        <DesignSection show={true} />
+        <ManageSection show={true} />
+        <StatisticsSection show={true} />
+        <IntegrationShowcase show={true} />
+        <DeploySection show={true} />
+        <SecuritySection show={true} />
+        <TestimonialsSection showTestimonials={true} />
+        <PricingSection showPricing={true} />
+        <BlogSection show={true} />
+        <CommunitySection show={true} />
         <FAQSection />
-        <CallToAction />
+        <CallToAction show={true} />
       </div>
     </>
   );
