@@ -178,7 +178,7 @@ export const Navbar = () => {
                     onClick={logout}
                   >
                     <LogOut size={20} />
-                    {activeRoute === 'logout' && <span className="font-medium">Logout</span>}
+                    <span className="font-medium">Logout</span>
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>

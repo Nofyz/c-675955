@@ -1,90 +1,137 @@
 
 import React from 'react';
-import { useAuth } from '@/contexts/AuthContext';
-import { Card } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { 
   Zap, 
-  FolderOpen, 
+  Plus, 
+  TrendingUp, 
   Users, 
-  Brain, 
-  BarChart3, 
-  Plus,
-  TrendingUp,
-  Clock,
-  Star
+  Brain,
+  BarChart3,
+  FolderOpen,
+  Star,
+  Calendar,
+  Download
 } from 'lucide-react';
 import { AnimatedTransition } from '@/components/AnimatedTransition';
 import { useAnimateIn } from '@/lib/animations';
-import { Link } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Dashboard = () => {
-  const { user } = useAuth();
   const showContent = useAnimateIn(false, 300);
+  const { isAuthenticated } = useAuth();
 
-  // Mock data - will be replaced with real data from API
-  const stats = {
-    totalSwipes: 247,
-    thisMonth: 23,
-    folders: 8,
-    boards: 4,
-    aiGenerations: 12
-  };
+  // Mock data for dashboard
+  const stats = [
+    {
+      title: 'Total Swipes',
+      value: '2,847',
+      change: '+12.5%',
+      trend: 'up' as const,
+      icon: <Zap className="h-4 w-4" />
+    },
+    {
+      title: 'AI Generations',
+      value: '1,234',
+      change: '+8.2%',
+      trend: 'up' as const,
+      icon: <Brain className="h-4 w-4" />
+    },
+    {
+      title: 'Active Boards',
+      value: '45',
+      change: '+25.0%',
+      trend: 'up' as const,
+      icon: <Users className="h-4 w-4" />
+    },
+    {
+      title: 'Team Members',
+      value: '12',
+      change: '+3.1%',
+      trend: 'up' as const,
+      icon: <Users className="h-4 w-4" />
+    }
+  ];
 
   const recentSwipes = [
     {
       id: '1',
-      title: 'Facebook Ad - E-commerce Product',
-      platform: 'META_FACEBOOK',
-      createdAt: '2024-01-15',
-      thumbnail: '/placeholder.svg'
+      title: 'Fitness App Video Ad',
+      platform: 'TikTok Creative Center',
+      thumbnail: '/placeholder.svg',
+      createdAt: '2 hours ago',
+      tags: ['fitness', 'video', 'ugc']
     },
     {
-      id: '2', 
-      title: 'TikTok UGC - Beauty Brand',
-      platform: 'TIKTOK_ORGANIC',
-      createdAt: '2024-01-14',
-      thumbnail: '/placeholder.svg'
+      id: '2',
+      title: 'E-commerce Product Carousel',
+      platform: 'Facebook Ad Library',
+      thumbnail: '/placeholder.svg',
+      createdAt: '4 hours ago',
+      tags: ['ecommerce', 'carousel']
     },
     {
       id: '3',
-      title: 'Google VSL - SaaS Demo',
-      platform: 'WISTIA_VSL',
-      createdAt: '2024-01-13',
-      thumbnail: '/placeholder.svg'
+      title: 'SaaS Landing Page Copy',
+      platform: 'Google Ads',
+      thumbnail: '/placeholder.svg',
+      createdAt: '1 day ago',
+      tags: ['saas', 'copy']
     }
   ];
 
   const quickActions = [
     {
-      title: 'Start Swiping',
-      description: 'Use the Chrome extension to save ads',
-      icon: <Zap className="text-primary" size={24} />,
-      link: '/swipes',
-      action: 'Install Extension'
+      title: 'Swipe New Ad',
+      description: 'Find and save ads from platforms',
+      icon: <Zap className="h-5 w-5" />,
+      href: '/swipes',
+      color: 'bg-blue-500'
+    },
+    {
+      title: 'Generate AI Copy',
+      description: 'Create copy with AI assistance',
+      icon: <Brain className="h-5 w-5" />,
+      href: '/ai-copywriter',
+      color: 'bg-purple-500'
     },
     {
       title: 'Create Board',
-      description: 'Organize swipes and collaborate',
-      icon: <Users className="text-blue-500" size={24} />,
-      link: '/boards',
-      action: 'New Board'
-    },
-    {
-      title: 'AI Copywriter',
-      description: 'Generate copy from your swipes',
-      icon: <Brain className="text-purple-500" size={24} />,
-      link: '/ai-copywriter',
-      action: 'Write Copy'
+      description: 'Organize swipes into collections',
+      icon: <FolderOpen className="h-5 w-5" />,
+      href: '/boards',
+      color: 'bg-green-500'
     },
     {
       title: 'View Analytics',
-      description: 'Track your swipe performance',
-      icon: <BarChart3 className="text-green-500" size={24} />,
-      link: '/analytics',
-      action: 'View Stats'
+      description: 'Track performance and insights',
+      icon: <BarChart3 className="h-5 w-5" />,
+      href: '/analytics',
+      color: 'bg-orange-500'
     }
   ];
+
+  if (!isAuthenticated) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 pt-24 pb-12">
+        <AnimatedTransition show={showContent} animation="slide-up">
+          <div className="text-center py-20">
+            <Zap className="mx-auto mb-8 text-primary" size={64} />
+            <h1 className="text-4xl font-bold mb-4">Welcome to SwipeBuilder</h1>
+            <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              The ultimate swipe file for ads and creative inspiration. Save, organize, and generate copy from the best ads across platforms.
+            </p>
+            <Button size="lg" className="gap-2">
+              <Plus size={20} />
+              Get Started
+            </Button>
+          </div>
+        </AnimatedTransition>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 pt-24 pb-12">
@@ -93,149 +140,102 @@ const Dashboard = () => {
           {/* Header */}
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold">
-                Welcome back, {user?.firstName || 'there'}! 👋
-              </h1>
-              <p className="text-muted-foreground mt-2">
-                Here's what's happening with your swipe file
+              <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
+              <p className="text-muted-foreground">
+                Welcome back! Here's what's happening with your swipe file.
               </p>
             </div>
-            <Button size="lg" className="gap-2">
-              <Plus size={20} />
-              Quick Start
+            <Button className="gap-2">
+              <Plus size={18} />
+              New Swipe
             </Button>
           </div>
 
-          {/* Stats Overview */}
+          {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground">Total Swipes</p>
-                  <p className="text-2xl font-bold">{stats.totalSwipes}</p>
-                </div>
-                <Zap className="text-primary opacity-20" size={32} />
-              </div>
-              <div className="flex items-center gap-1 mt-2">
-                <TrendingUp size={14} className="text-green-500" />
-                <span className="text-sm text-green-500">+{stats.thisMonth} this month</span>
-              </div>
-            </Card>
-
-            <Card className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground">Folders</p>
-                  <p className="text-2xl font-bold">{stats.folders}</p>
-                </div>
-                <FolderOpen className="text-blue-500 opacity-20" size={32} />
-              </div>
-              <div className="flex items-center gap-1 mt-2">
-                <span className="text-sm text-muted-foreground">Organized content</span>
-              </div>
-            </Card>
-
-            <Card className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground">Boards</p>
-                  <p className="text-2xl font-bold">{stats.boards}</p>
-                </div>
-                <Users className="text-purple-500 opacity-20" size={32} />
-              </div>
-              <div className="flex items-center gap-1 mt-2">
-                <span className="text-sm text-muted-foreground">Collaborative spaces</span>
-              </div>
-            </Card>
-
-            <Card className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-muted-foreground">AI Generations</p>
-                  <p className="text-2xl font-bold">{stats.aiGenerations}</p>
-                </div>
-                <Brain className="text-green-500 opacity-20" size={32} />
-              </div>
-              <div className="flex items-center gap-1 mt-2">
-                <span className="text-sm text-muted-foreground">This month</span>
-              </div>
-            </Card>
+            {stats.map((stat) => (
+              <Card key={stat.title}>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
+                  {stat.icon}
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">{stat.value}</div>
+                  <div className="flex items-center gap-1 text-xs text-muted-foreground mt-1">
+                    <TrendingUp className="h-3 w-3 text-green-500" />
+                    <span className="text-green-500">{stat.change}</span>
+                    from last month
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
 
-          {/* Quick Actions */}
-          <div>
-            <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {quickActions.map((action, index) => (
-                <Card key={index} className="p-6 hover:shadow-md transition-shadow cursor-pointer">
-                  <Link to={action.link} className="block">
-                    <div className="flex items-start gap-4">
-                      <div className="p-2 rounded-lg bg-muted/50">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Quick Actions */}
+            <div className="lg:col-span-1">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Quick Actions</CardTitle>
+                  <CardDescription>Jump into your workflow</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  {quickActions.map((action) => (
+                    <a
+                      key={action.title}
+                      href={action.href}
+                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted/50 transition-colors cursor-pointer"
+                    >
+                      <div className={`p-2 rounded-lg text-white ${action.color}`}>
                         {action.icon}
                       </div>
+                      <div>
+                        <h4 className="font-medium">{action.title}</h4>
+                        <p className="text-xs text-muted-foreground">{action.description}</p>
+                      </div>
+                    </a>
+                  ))}
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Recent Swipes */}
+            <div className="lg:col-span-2">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Recent Swipes</CardTitle>
+                  <CardDescription>Your latest saved ads and creatives</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  {recentSwipes.map((swipe) => (
+                    <div key={swipe.id} className="flex items-center gap-4 p-3 rounded-lg hover:bg-muted/50 transition-colors cursor-pointer">
+                      <div className="w-16 h-12 bg-muted rounded-lg overflow-hidden flex-shrink-0">
+                        <img 
+                          src={swipe.thumbnail} 
+                          alt={swipe.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="font-medium">{action.title}</h3>
-                        <p className="text-sm text-muted-foreground mt-1">
-                          {action.description}
-                        </p>
-                        <Button variant="outline" size="sm" className="mt-3">
-                          {action.action}
-                        </Button>
+                        <h4 className="font-medium truncate">{swipe.title}</h4>
+                        <p className="text-sm text-muted-foreground">{swipe.platform}</p>
+                        <div className="flex items-center gap-2 mt-2">
+                          {swipe.tags.map((tag) => (
+                            <Badge key={tag} variant="secondary" className="text-xs">
+                              {tag}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                      <div className="text-xs text-muted-foreground">
+                        {swipe.createdAt}
                       </div>
                     </div>
-                  </Link>
-                </Card>
-              ))}
+                  ))}
+                </CardContent>
+              </Card>
             </div>
           </div>
-
-          {/* Recent Swipes */}
-          <div>
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-semibold">Recent Swipes</h2>
-              <Button variant="outline" asChild>
-                <Link to="/swipes">View All</Link>
-              </Button>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {recentSwipes.map((swipe) => (
-                <Card key={swipe.id} className="p-4 hover:shadow-md transition-shadow">
-                  <div className="aspect-video bg-muted rounded-lg mb-3 flex items-center justify-center">
-                    <img 
-                      src={swipe.thumbnail} 
-                      alt={swipe.title}
-                      className="w-full h-full object-cover rounded-lg"
-                    />
-                  </div>
-                  <h3 className="font-medium truncate">{swipe.title}</h3>
-                  <div className="flex items-center gap-2 mt-2">
-                    <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded-full">
-                      {swipe.platform.replace('_', ' ')}
-                    </span>
-                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                      <Clock size={12} />
-                      {new Date(swipe.createdAt).toLocaleDateString()}
-                    </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
-
-          {/* Chrome Extension CTA */}
-          <Card className="p-8 bg-gradient-to-r from-primary/10 to-blue-500/10 border-primary/20">
-            <div className="text-center max-w-2xl mx-auto">
-              <Star className="text-primary mx-auto mb-4" size={48} />
-              <h3 className="text-2xl font-semibold mb-2">Ready to Start Swiping?</h3>
-              <p className="text-muted-foreground mb-6">
-                Install our Chrome extension to save ads from Facebook, TikTok, Google, and more platforms directly to your swipe file.
-              </p>
-              <Button size="lg" className="gap-2">
-                <Plus size={20} />
-                Install Chrome Extension
-              </Button>
-            </div>
-          </Card>
         </div>
       </AnimatedTransition>
     </div>
