@@ -102,7 +102,7 @@ export const useCases = [
   {
     title: 'Ad Creators',
     description: 'Build high-converting ads with AI-powered copywriting and proven templates',
-    icon: <Users className="w-6 h-6 text-primary" />,
+    iconName: 'Users',
     features: [
       'AI copywriter with platform-specific templates',
       'Swipe file of high-performing ads',
@@ -112,7 +112,7 @@ export const useCases = [
   {
     title: 'Designers',
     description: 'Create stunning visuals with design systems and creative inspiration',
-    icon: <Palette className="w-6 h-6 text-primary" />,
+    iconName: 'Palette',
     features: [
       'Visual inspiration library',
       'Design system templates',
@@ -122,7 +122,7 @@ export const useCases = [
   {
     title: 'Copywriters',
     description: 'Write compelling copy that converts with AI assistance and proven frameworks',
-    icon: <PenTool className="w-6 h-6 text-primary" />,
+    iconName: 'PenTool',
     features: [
       'AI-powered copy generation',
       'Copy framework library',
@@ -132,7 +132,7 @@ export const useCases = [
   {
     title: 'Researchers',
     description: 'Analyze competitor ads and market trends with advanced tools',
-    icon: <Search className="w-6 h-6 text-primary" />,
+    iconName: 'Search',
     features: [
       'Competitor analysis tools',
       'Market trend insights',
@@ -142,7 +142,7 @@ export const useCases = [
   {
     title: 'Developers',
     description: 'Integrate with APIs and automate workflows with developer tools',
-    icon: <Code className="w-6 h-6 text-primary" />,
+    iconName: 'Code',
     features: [
       'API integrations',
       'Workflow automation',
@@ -152,7 +152,7 @@ export const useCases = [
   {
     title: 'Everyone',
     description: 'Access powerful marketing tools designed for teams of any size',
-    icon: <Star className="w-6 h-6 text-primary" />,
+    iconName: 'Star',
     features: [
       'Collaborative workspaces',
       'Template library',
