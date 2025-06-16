@@ -5,6 +5,7 @@ export interface UseCase {
   title: string;
   description: string;
   icon: React.ReactNode;
+  iconName: string;
   features: string[];
 }
 

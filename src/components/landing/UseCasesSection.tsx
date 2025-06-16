@@ -61,7 +61,7 @@ export const UseCasesSection: React.FC = () => {
             {useCases.map((useCase, index) => (
               <UseCaseCard
                 key={index}
-                useCase={{...useCase, icon: null}}
+                useCase={useCase}
                 isActive={activeCase === index}
                 onClick={() => setActiveCase(index)}
               />

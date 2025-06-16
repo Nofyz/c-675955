@@ -1,4 +1,3 @@
-
 import { UserCasesData, Book } from './UseCasesTypes';
 import { Users, Palette, PenTool, Search, Code, Star } from 'lucide-react';
 
@@ -97,11 +96,12 @@ export const booksData: Book[] = [
   }
 ];
 
-// Export useCases for UseCasesSection
+// Export useCases for UseCasesSection with proper icon property
 export const useCases = [
   {
     title: 'Ad Creators',
     description: 'Build high-converting ads with AI-powered copywriting and proven templates',
+    icon: null,
     iconName: 'Users',
     features: [
       'AI copywriter with platform-specific templates',
@@ -112,6 +112,7 @@ export const useCases = [
   {
     title: 'Designers',
     description: 'Create stunning visuals with design systems and creative inspiration',
+    icon: null,
     iconName: 'Palette',
     features: [
       'Visual inspiration library',
@@ -122,6 +123,7 @@ export const useCases = [
   {
     title: 'Copywriters',
     description: 'Write compelling copy that converts with AI assistance and proven frameworks',
+    icon: null,
     iconName: 'PenTool',
     features: [
       'AI-powered copy generation',
@@ -132,6 +134,7 @@ export const useCases = [
   {
     title: 'Researchers',
     description: 'Analyze competitor ads and market trends with advanced tools',
+    icon: null,
     iconName: 'Search',
     features: [
       'Competitor analysis tools',
@@ -142,6 +145,7 @@ export const useCases = [
   {
     title: 'Developers',
     description: 'Integrate with APIs and automate workflows with developer tools',
+    icon: null,
     iconName: 'Code',
     features: [
       'API integrations',
@@ -152,6 +156,7 @@ export const useCases = [
   {
     title: 'Everyone',
     description: 'Access powerful marketing tools designed for teams of any size',
+    icon: null,
     iconName: 'Star',
     features: [
       'Collaborative workspaces',
