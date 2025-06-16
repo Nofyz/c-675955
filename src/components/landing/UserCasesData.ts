@@ -1,3 +1,4 @@
+
 import { UserCasesData, Book } from './UseCasesTypes';
 import { Users, Palette, PenTool, Search, Code, Star } from 'lucide-react';
 
@@ -69,22 +70,26 @@ export const booksData: Book[] = [
     author: "Maria Johnson",
     coverColor: "bg-[#f97316]",
     textColor: "text-white"
-  }, {
+  },
+  {
     title: "Design Patterns",
     author: "Alex Thompson",
     coverColor: "bg-[#8b5cf6]",
     textColor: "text-white"
-  }, {
+  },
+  {
     title: "The Art of Focus",
     author: "Sarah Williams",
     coverColor: "bg-[#0ea5e9]",
     textColor: "text-white"
-  }, {
+  },
+  {
     title: "Digital Minimalism",
     author: "Cal Newport",
     coverColor: "bg-[#d946ef]",
     textColor: "text-white"
-  }, {
+  },
+  {
     title: "Atomic Habits",
     author: "James Clear",
     coverColor: "bg-[#f97316]",

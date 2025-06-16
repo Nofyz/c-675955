@@ -42,9 +42,9 @@ const NavItem = ({ to, icon, label, active, onClick }: NavItemProps) => {
         <Link 
           to={to} 
           className={cn(
-            "relative flex items-center justify-center px-4 py-3 rounded-lg transition-all duration-300",
+            "relative flex items-center justify-center px-3 py-3 rounded-lg transition-all duration-300 whitespace-nowrap",
             "hover:bg-primary/10 hover:text-primary",
-            "overflow-hidden",
+            "overflow-hidden mx-1",
             active ? "bg-primary/10 text-primary" : "text-foreground/80"
           )}
           onClick={(e) => {
@@ -53,14 +53,14 @@ const NavItem = ({ to, icon, label, active, onClick }: NavItemProps) => {
           }}
         >
           <span className={cn(
-            "transition-all duration-300",
+            "transition-all duration-300 flex items-center gap-2",
             active ? "text-primary" : "text-foreground/60"
           )}>
             {icon}
+            {active && (
+              <span className="font-medium text-sm">{label}</span>
+            )}
           </span>
-          {active && (
-            <span className="ml-2 font-medium">{label}</span>
-          )}
         </Link>
       </TooltipTrigger>
       <TooltipContent>
@@ -100,108 +100,114 @@ export const Navbar = () => {
   };
 
   const navItems = [
-    { to: '/', icon: <Home size={20} />, label: 'Dashboard', id: 'dashboard' },
-    { to: '/swipes', icon: <Zap size={20} />, label: 'Swipes', id: 'swipes' },
-    { to: '/boards', icon: <Users size={20} />, label: 'Boards', id: 'boards' },
-    { to: '/ai-copywriter', icon: <Brain size={20} />, label: 'AI Copy', id: 'ai' },
-    { to: '/analytics', icon: <BarChart3 size={20} />, label: 'Analytics', id: 'analytics' },
-    { to: '/search', icon: <Search size={20} />, label: 'Search', id: 'search' },
+    { to: '/', icon: <Home size={18} />, label: 'Dashboard', id: 'dashboard' },
+    { to: '/swipes', icon: <Zap size={18} />, label: 'Swipes', id: 'swipes' },
+    { to: '/boards', icon: <Users size={18} />, label: 'Boards', id: 'boards' },
+    { to: '/ai-copywriter', icon: <Brain size={18} />, label: 'AI Copy', id: 'ai' },
+    { to: '/analytics', icon: <BarChart3 size={18} />, label: 'Analytics', id: 'analytics' },
+    { to: '/search', icon: <Search size={18} />, label: 'Search', id: 'search' },
   ];
 
   const userItems = [
-    { to: '/profile', icon: <User size={20} />, label: 'Profile', id: 'profile' },
-    { to: '/settings', icon: <Settings size={20} />, label: 'Settings', id: 'settings' },
+    { to: '/profile', icon: <User size={18} />, label: 'Profile', id: 'profile' },
+    { to: '/settings', icon: <Settings size={18} />, label: 'Settings', id: 'settings' },
   ];
 
   return (
     <>
       <TooltipProvider>
-        <header className="glass-panel fixed top-6 left-1/2 transform -translate-x-1/2 z-40 rounded-lg px-1 py-1">
+        <header className="glass-panel fixed top-6 left-1/2 transform -translate-x-1/2 z-40 rounded-lg px-2 py-1">
           <nav className="flex items-center">
             {/* Logo/Brand */}
-            <div className="flex items-center gap-2 px-3 mr-2">
+            <div className="flex items-center gap-2 px-3 mr-3">
               <Zap className="text-primary" size={24} />
-              <span className="font-bold text-lg">SwipeBuilder</span>
+              <span className="font-bold text-lg whitespace-nowrap">SwipeBuilder</span>
             </div>
             
             {/* Main Navigation - Only show if authenticated */}
             {isAuthenticated && (
               <>
-                {navItems.map((item) => (
-                  <NavItem
-                    key={item.id}
-                    to={item.to}
-                    icon={item.icon}
-                    label={item.label}
-                    active={activeRoute === item.id}
-                    onClick={() => {}}
-                  />
-                ))}
+                <div className="flex items-center">
+                  {navItems.map((item) => (
+                    <NavItem
+                      key={item.id}
+                      to={item.to}
+                      icon={item.icon}
+                      label={item.label}
+                      active={activeRoute === item.id}
+                      onClick={() => {}}
+                    />
+                  ))}
+                </div>
                 
-                <div className="mx-2 h-6 w-px bg-border/50" />
+                <div className="mx-3 h-6 w-px bg-border/50" />
                 
-                {userItems.map((item) => (
-                  <NavItem
-                    key={item.id}
-                    to={item.to}
-                    icon={item.icon}
-                    label={item.label}
-                    active={activeRoute === item.id}
-                    onClick={() => {}}
-                  />
-                ))}
+                <div className="flex items-center">
+                  {userItems.map((item) => (
+                    <NavItem
+                      key={item.id}
+                      to={item.to}
+                      icon={item.icon}
+                      label={item.label}
+                      active={activeRoute === item.id}
+                      onClick={() => {}}
+                    />
+                  ))}
+                </div>
               </>
             )}
             
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="rounded-lg ml-1"
-                  onClick={toggleTheme}
-                >
-                  {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Toggle {theme === 'dark' ? 'light' : 'dark'} mode</p>
-              </TooltipContent>
-            </Tooltip>
-            
-            {isAuthenticated ? (
+            <div className="flex items-center ml-3 gap-1">
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
                     variant="ghost"
-                    className="flex items-center gap-2 px-4 py-3 rounded-lg hover:bg-primary hover:text-primary-foreground"
-                    onClick={logout}
+                    size="icon"
+                    className="rounded-lg"
+                    onClick={toggleTheme}
                   >
-                    <LogOut size={20} />
-                    <span className="font-medium">Logout</span>
+                    {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
-                  <p>Logout</p>
+                  <p>Toggle {theme === 'dark' ? 'light' : 'dark'} mode</p>
                 </TooltipContent>
               </Tooltip>
-            ) : (
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    className="flex items-center gap-2 px-4 py-3 rounded-lg hover:bg-primary hover:text-primary-foreground"
-                    onClick={handleOpenAuthModal}
-                  >
-                    <LogIn size={20} />
-                    <span className="font-medium">Login</span>
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Login</p>
-                </TooltipContent>
-              </Tooltip>
-            )}
+              
+              {isAuthenticated ? (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-primary hover:text-primary-foreground whitespace-nowrap"
+                      onClick={logout}
+                    >
+                      <LogOut size={18} />
+                      <span className="font-medium text-sm">Logout</span>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Logout</p>
+                  </TooltipContent>
+                </Tooltip>
+              ) : (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-primary hover:text-primary-foreground whitespace-nowrap"
+                      onClick={handleOpenAuthModal}
+                    >
+                      <LogIn size={18} />
+                      <span className="font-medium text-sm">Login</span>
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Login</p>
+                  </TooltipContent>
+                </Tooltip>
+              )}
+            </div>
           </nav>
         </header>
       </TooltipProvider>
