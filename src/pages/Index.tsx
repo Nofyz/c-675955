@@ -6,21 +6,17 @@ import { EverythingYouNeedSection } from '@/components/landing/EverythingYouNeed
 import { TestimonialsNewSection } from '@/components/landing/TestimonialsNewSection';
 import { PricingNewSection } from '@/components/landing/PricingNewSection';
 import { FooterSection } from '@/components/landing/FooterSection';
-import { LoadingScreen } from '@/components/landing/LoadingScreen';
 
 const Index = () => {
   return (
-    <>
-      <LoadingScreen />
-      <div className="min-h-screen">
-        <CopyThiefHero />
-        <TrustedBySection />
-        <EverythingYouNeedSection />
-        <TestimonialsNewSection />
-        <PricingNewSection />
-        <FooterSection />
-      </div>
-    </>
+    <div className="min-h-screen bg-gray-900">
+      <CopyThiefHero />
+      <TrustedBySection />
+      <EverythingYouNeedSection />
+      <TestimonialsNewSection />
+      <PricingNewSection />
+      <FooterSection />
+    </div>
   );
 };
 

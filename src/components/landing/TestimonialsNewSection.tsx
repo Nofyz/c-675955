@@ -32,23 +32,23 @@ export const TestimonialsNewSection: React.FC = () => {
   ];
 
   return (
-    <section className="py-24 bg-gradient-to-b from-gray-50 to-white">
+    <section className="py-24 bg-gray-800">
       <div className="max-w-7xl mx-auto px-4">
         <AnimatedTransition show={showContent} animation="slide-up">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Loved by <span className="text-purple-600">thousands</span> of marketers
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+              Loved by <span className="text-blue-400">thousands</span> of marketers
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Join the community of successful advertisers who use CopyThief daily to{' '}
-              <span className="text-purple-600 font-semibold">find winning ads</span> and{' '}
-              <span className="text-blue-600 font-semibold">scale their campaigns</span>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Join the community of successful advertisers who use SwipeBuilder daily to{' '}
+              <span className="text-blue-400 font-semibold">find winning ads</span> and{' '}
+              <span className="text-purple-400 font-semibold">scale their campaigns</span>
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+              <div key={index} className="bg-gray-900 rounded-2xl p-8 border border-gray-700 hover:border-blue-500 transition-colors">
                 {/* Rating */}
                 <div className="flex mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
@@ -57,7 +57,7 @@ export const TestimonialsNewSection: React.FC = () => {
                 </div>
 
                 {/* Testimonial text */}
-                <p className="text-gray-700 text-lg mb-6 leading-relaxed">
+                <p className="text-gray-300 text-lg mb-6 leading-relaxed">
                   "{testimonial.text}"
                 </p>
 
@@ -69,19 +69,12 @@ export const TestimonialsNewSection: React.FC = () => {
                     className="w-12 h-12 rounded-full object-cover"
                   />
                   <div>
-                    <div className="font-semibold text-gray-900">{testimonial.author}</div>
-                    <div className="text-gray-500 text-sm">{testimonial.role}</div>
+                    <div className="font-semibold text-white">{testimonial.author}</div>
+                    <div className="text-gray-400 text-sm">{testimonial.role}</div>
                   </div>
                 </div>
               </div>
             ))}
-          </div>
-
-          {/* Navigation dots */}
-          <div className="flex justify-center gap-2 mt-12">
-            <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-            <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
-            <div className="w-2 h-2 bg-gray-300 rounded-full"></div>
           </div>
         </AnimatedTransition>
       </div>
