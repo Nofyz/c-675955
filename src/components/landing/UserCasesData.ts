@@ -1,5 +1,5 @@
+
 import { UserCasesData, Book } from './UseCasesTypes';
-import { Users, Palette, PenTool, Search, Code, Star } from 'lucide-react';
 
 export const userCasesData: UserCasesData = {
   Marketers: {
@@ -63,105 +63,29 @@ export const userCasesData: UserCasesData = {
   }
 };
 
-export const booksData: Book[] = [
-  {
-    title: "The Creative Mind",
-    author: "Maria Johnson",
-    coverColor: "bg-[#f97316]",
-    textColor: "text-white"
-  },
-  {
-    title: "Design Patterns",
-    author: "Alex Thompson",
-    coverColor: "bg-[#8b5cf6]",
-    textColor: "text-white"
-  },
-  {
-    title: "The Art of Focus",
-    author: "Sarah Williams",
-    coverColor: "bg-[#0ea5e9]",
-    textColor: "text-white"
-  },
-  {
-    title: "Digital Minimalism",
-    author: "Cal Newport",
-    coverColor: "bg-[#d946ef]",
-    textColor: "text-white"
-  },
-  {
-    title: "Atomic Habits",
-    author: "James Clear",
-    coverColor: "bg-[#f97316]",
-    textColor: "text-white"
-  }
-];
-
-// Export useCases for UseCasesSection with proper icon property
-export const useCases = [
-  {
-    title: 'Ad Creators',
-    description: 'Build high-converting ads with AI-powered copywriting and proven templates',
-    icon: null,
-    iconName: 'Users',
-    features: [
-      'AI copywriter with platform-specific templates',
-      'Swipe file of high-performing ads',
-      'A/B testing frameworks'
-    ]
-  },
-  {
-    title: 'Designers',
-    description: 'Create stunning visuals with design systems and creative inspiration',
-    icon: null,
-    iconName: 'Palette',
-    features: [
-      'Visual inspiration library',
-      'Design system templates',
-      'Brand consistency tools'
-    ]
-  },
-  {
-    title: 'Copywriters',
-    description: 'Write compelling copy that converts with AI assistance and proven frameworks',
-    icon: null,
-    iconName: 'PenTool',
-    features: [
-      'AI-powered copy generation',
-      'Copy framework library',
-      'Performance analytics'
-    ]
-  },
-  {
-    title: 'Researchers',
-    description: 'Analyze competitor ads and market trends with advanced tools',
-    icon: null,
-    iconName: 'Search',
-    features: [
-      'Competitor analysis tools',
-      'Market trend insights',
-      'Performance benchmarking'
-    ]
-  },
-  {
-    title: 'Developers',
-    description: 'Integrate with APIs and automate workflows with developer tools',
-    icon: null,
-    iconName: 'Code',
-    features: [
-      'API integrations',
-      'Workflow automation',
-      'Custom tool development'
-    ]
-  },
-  {
-    title: 'Everyone',
-    description: 'Access powerful marketing tools designed for teams of any size',
-    icon: null,
-    iconName: 'Star',
-    features: [
-      'Collaborative workspaces',
-      'Template library',
-      'Team management'
-    ]
-  }
-];
+export const booksData: Book[] = [{
+  title: "The Creative Mind",
+  author: "Maria Johnson",
+  coverColor: "bg-[#f97316]",
+  textColor: "text-white"
+}, {
+  title: "Design Patterns",
+  author: "Alex Thompson",
+  coverColor: "bg-[#8b5cf6]",
+  textColor: "text-white"
+}, {
+  title: "The Art of Focus",
+  author: "Sarah Williams",
+  coverColor: "bg-[#0ea5e9]",
+  textColor: "text-white"
+}, {
+  title: "Digital Minimalism",
+  author: "Cal Newport",
+  coverColor: "bg-[#d946ef]",
+  textColor: "text-white"
+}, {
+  title: "Atomic Habits",
+  author: "James Clear",
+  coverColor: "bg-[#f97316]",
+  textColor: "text-white"
+}];
