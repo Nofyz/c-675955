@@ -1,59 +1,76 @@
-import { useState } from 'react';
-import { AnimatedTransition } from '@/components/AnimatedTransition';
-import { cn } from '@/lib/utils';
-import { UserType } from './UseCasesTypes';
-import { userCasesData, booksData } from './UserCasesData';
 
-// Import individual case components
-import MarketersCase from './UserCases/MarketersCase';
-import DesignersCase from './UserCases/DesignersCase';
-import WritersCase from './UserCases/WritersCase';
-import ResearchersCase from './UserCases/ResearchersCase';
-import DevelopersCase from './UserCases/DevelopersCase';
-import EveryoneCase from './UserCases/EveryoneCase';
-interface UseCasesSectionProps {
-  show: boolean;
-}
-const UseCasesSection = ({
-  show
-}: UseCasesSectionProps) => {
-  const [activeUserType, setActiveUserType] = useState<UserType>('Marketers');
-  const currentCase = userCasesData[activeUserType];
-  return <AnimatedTransition show={show} animation="slide-up" duration={600}>
-      <div className="py-24 md:py-32">
-        <div className="max-w-6xl mx-auto px-4 mb-16">
-          <h2 className="text-3xl text-center mb-12 tracking-tight text-blue-700 font-bold md:text-7xl">
-            For visual minds of all kinds.
-          </h2>
-          
-          <div className="flex justify-center space-x-8 mb-10">
-            {Object.keys(userCasesData).map(type => <button key={type} className={cn("relative pb-1", activeUserType === type ? "text-primary font-medium" : "text-muted-foreground hover:text-foreground transition-colors")} onClick={() => setActiveUserType(type as UserType)}>
-                {type}
-                {activeUserType === type && <span className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-primary rounded-full" />}
-              </button>)}
-          </div>
-          
-          <div className={cn("rounded-xl overflow-hidden transition-all duration-500", currentCase.background)}>
-            <div className="p-10 md:p-16 bg-blue-600">
-              <div className="text-center mb-4">
-                <p className="uppercase tracking-wide text-sm font-medium mb-6 text-white">Made for {activeUserType}</p>
-                <h3 className="text-4xl md:text-5xl font-medium mb-2 text-white">
-                  {currentCase.title} 
-                  <span className="block italic font-light">{currentCase.subtitle}</span>
-                </h3>
-              </div>
-              
-              {/* Render the appropriate component based on activeUserType */}
-              {activeUserType === 'Marketers' && <MarketersCase data={currentCase} />}
-              {activeUserType === 'Designers' && <DesignersCase data={currentCase} />}
-              {activeUserType === 'Writers' && <WritersCase data={currentCase} />}
-              {activeUserType === 'Researchers' && <ResearchersCase data={currentCase} />}
-              {activeUserType === 'Developers' && <DevelopersCase data={currentCase} />}
-              {activeUserType === 'Everyone' && <EveryoneCase data={currentCase} books={booksData} />}
-            </div>
-          </div>
-        </div>
-      </div>
-    </AnimatedTransition>;
+import React, { useState } from 'react';
+import { AnimatedTransition } from '@/components/AnimatedTransition';
+import { useAnimateIn } from '@/lib/animations';
+import { useCases } from './UserCasesData';
+import { UseCaseProps } from './UseCasesTypes';
+import { Users, Palette, PenTool, Search, Code, Star } from 'lucide-react';
+
+const iconMap = {
+  Users: Users,
+  Palette: Palette,
+  PenTool: PenTool,
+  Search: Search,
+  Code: Code,
+  Star: Star
 };
+
+const UseCaseCard: React.FC<UseCaseProps> = ({ useCase, isActive, onClick }) => {
+  const IconComponent = iconMap[useCase.iconName as keyof typeof iconMap] || Star;
+  
+  return (
+    <div 
+      className={`p-6 rounded-xl cursor-pointer transition-all duration-300 ${
+        isActive ? 'bg-primary/10 border-primary' : 'bg-card hover:bg-card/80'
+      } border`}
+      onClick={onClick}
+    >
+      <div className="flex items-center gap-3 mb-3">
+        <IconComponent size={24} className="text-primary" />
+        <h3 className="font-semibold">{useCase.title}</h3>
+      </div>
+      <p className="text-muted-foreground text-sm mb-4">{useCase.description}</p>
+      <div className="space-y-2">
+        {useCase.features.map((feature, index) => (
+          <div key={index} className="flex items-center gap-2 text-sm">
+            <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+            {feature}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export const UseCasesSection: React.FC = () => {
+  const showContent = useAnimateIn(false, 300);
+  const [activeCase, setActiveCase] = useState(0);
+
+  return (
+    <section className="py-24 bg-gradient-to-b from-background to-muted/30">
+      <div className="max-w-7xl mx-auto px-4">
+        <AnimatedTransition show={showContent} animation="slide-up">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">Built for Every Creator</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Whether you're building ads, writing copy, or managing campaigns - SwipeBuilder adapts to your workflow
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {useCases.map((useCase, index) => (
+              <UseCaseCard
+                key={index}
+                useCase={useCase}
+                isActive={activeCase === index}
+                onClick={() => setActiveCase(index)}
+              />
+            ))}
+          </div>
+        </AnimatedTransition>
+      </div>
+    </section>
+  );
+};
+
 export default UseCasesSection;

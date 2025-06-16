@@ -1,13 +1,21 @@
 
-export type UserType = 'Marketers' | 'Designers' | 'Writers' | 'Researchers' | 'Developers' | 'Everyone';
+import React from 'react';
 
-export interface Book {
+export interface UseCase {
   title: string;
-  author: string;
-  coverColor: string;
-  textColor: string;
+  description: string;
+  icon: React.ReactNode;
+  iconName: string;
+  features: string[];
 }
 
+export interface UseCaseProps {
+  useCase: UseCase;
+  isActive: boolean;
+  onClick: () => void;
+}
+
+// Legacy types for UserCases components
 export interface UserCase {
   title: string;
   subtitle: string;
@@ -25,4 +33,11 @@ export interface UserCase {
 
 export interface UserCasesData {
   [key: string]: UserCase;
+}
+
+export interface Book {
+  title: string;
+  author: string;
+  coverColor: string;
+  textColor: string;
 }

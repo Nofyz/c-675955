@@ -1,81 +1,51 @@
 
-export type CortexItem = {
+// Mock data for manage page
+export interface CortexItem {
   id: string;
   title: string;
   url: string;
   type: string;
   createdDate: string;
-  source: string;
   keywords: string[];
+  source: string;
   pitch: string;
   writer: string;
-};
+}
 
-export const cortexItems: CortexItem[] = [
+export const cortexData: CortexItem[] = [
   {
     id: '1',
-    title: 'Neural networks fundamentals',
-    url: '/cortex/neural-networks',
-    type: 'Article',
-    createdDate: '2023-04-15',
-    source: 'Research Paper',
-    keywords: ['AI', 'Machine Learning', 'Deep Learning'],
-    pitch: 'Foundational knowledge on neural networks',
-    writer: 'Alex Johnson'
+    title: 'Sample Project',
+    url: 'https://example.com',
+    type: 'Video Ad',
+    createdDate: '2024-01-15',
+    keywords: ['marketing', 'conversion'],
+    source: 'Facebook',
+    pitch: 'High-converting video ad for e-commerce',
+    writer: 'John Doe'
   },
   {
     id: '2',
-    title: 'Cloud architecture patterns',
-    url: '/cortex/cloud-patterns',
-    type: 'Guide',
-    createdDate: '2023-05-22',
-    source: 'Internal Knowledge',
-    keywords: ['Cloud', 'Architecture', 'Patterns'],
-    pitch: 'Best practices for cloud systems',
-    writer: 'Sarah Miller'
-  },
-  {
-    id: '3',
-    title: 'UX research methods',
-    url: '/cortex/ux-research',
-    type: 'Collection',
-    createdDate: '2023-06-10',
-    source: 'External Website',
-    keywords: ['UX', 'Research', 'Design'],
-    pitch: 'Comprehensive guide to UX research',
-    writer: 'David Chen'
-  },
-  {
-    id: '4',
-    title: 'Product strategy',
-    url: '/cortex/product-strategy',
-    type: 'Template',
-    createdDate: '2023-07-05',
-    source: 'Team Workshop',
-    keywords: ['Product', 'Strategy', 'Management'],
-    pitch: 'Framework for product strategy',
-    writer: 'Emily Rodriguez'
-  },
-  {
-    id: '5',
-    title: 'JavaScript patterns',
-    url: '/cortex/js-patterns',
-    type: 'Code',
-    createdDate: '2023-08-18',
-    source: 'Book',
-    keywords: ['JavaScript', 'Patterns', 'Development'],
-    pitch: 'Effective JavaScript patterns and practices',
-    writer: 'Michael Park'
+    title: 'Landing Page Copy',
+    url: 'https://example2.com',
+    type: 'Landing Page',
+    createdDate: '2024-01-10',
+    keywords: ['landing', 'copy'],
+    source: 'Google',
+    pitch: 'Convert visitors with compelling copy',
+    writer: 'Jane Smith'
   }
 ];
+
+export const mockProjects = cortexData;
 
 export const columns = [
   { id: 'title', name: 'Title', sortable: true },
   { id: 'url', name: 'URL', sortable: false },
   { id: 'type', name: 'Type', sortable: true },
-  { id: 'createdDate', name: 'Created Date', sortable: true },
+  { id: 'createdDate', name: 'Created', sortable: true },
   { id: 'keywords', name: 'Keywords', sortable: false },
   { id: 'source', name: 'Source', sortable: true },
   { id: 'pitch', name: 'Pitch', sortable: false },
-  { id: 'writer', name: 'Writer', sortable: true },
+  { id: 'writer', name: 'Writer', sortable: true }
 ];

@@ -3,20 +3,21 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
-import Index from "./pages/Index";
-import WhyPage from "./pages/WhyPage";
-import HowPage from "./pages/HowPage";
-import NotFound from "./pages/NotFound";
-import Profile from "./pages/Profile";
-import Import from "./pages/Import";
+import Dashboard from "./pages/Dashboard";
+import SwipesPage from "./pages/SwipesPage";
+import BoardsPage from "./pages/BoardsPage";
+import AiCopywriterPage from "./pages/AiCopywriterPage";
+import AnalyticsPage from "./pages/AnalyticsPage";
 import SearchPage from "./pages/SearchPage";
+import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
-import ManagePage from "./pages/ManagePage";
+import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
+import { useAuth } from "@/contexts/AuthContext";
 
 const queryClient = new QueryClient();
 
@@ -35,71 +36,106 @@ const PageTransition = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
+// Protected Route wrapper
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const { isAuthenticated } = useAuth();
+  
+  if (!isAuthenticated) {
+    return <Navigate to="/" replace />;
+  }
+  
+  return <>{children}</>;
+};
+
 const AppRoutes = () => {
+  const { isAuthenticated } = useAuth();
+  
   return (
     <Routes>
       <Route 
         path="/" 
         element={
           <PageTransition>
-            <Index />
+            {isAuthenticated ? <Dashboard /> : <Navigate to="/landing" replace />}
           </PageTransition>
         } 
       />
       <Route 
-        path="/why" 
+        path="/landing" 
         element={
           <PageTransition>
-            <WhyPage />
+            <Dashboard />
           </PageTransition>
         } 
       />
       <Route 
-        path="/how" 
+        path="/swipes" 
         element={
-          <PageTransition>
-            <HowPage />
-          </PageTransition>
+          <ProtectedRoute>
+            <PageTransition>
+              <SwipesPage />
+            </PageTransition>
+          </ProtectedRoute>
         } 
       />
       <Route 
-        path="/manage" 
+        path="/boards" 
         element={
-          <PageTransition>
-            <ManagePage />
-          </PageTransition>
+          <ProtectedRoute>
+            <PageTransition>
+              <BoardsPage />
+            </PageTransition>
+          </ProtectedRoute>
         } 
       />
       <Route 
-        path="/profile" 
+        path="/ai-copywriter" 
         element={
-          <PageTransition>
-            <Profile />
-          </PageTransition>
+          <ProtectedRoute>
+            <PageTransition>
+              <AiCopywriterPage />
+            </PageTransition>
+          </ProtectedRoute>
         } 
       />
       <Route 
-        path="/import" 
+        path="/analytics" 
         element={
-          <PageTransition>
-            <Import />
-          </PageTransition>
+          <ProtectedRoute>
+            <PageTransition>
+              <AnalyticsPage />
+            </PageTransition>
+          </ProtectedRoute>
         } 
       />
       <Route 
         path="/search" 
         element={
-          <PageTransition>
-            <SearchPage />
-          </PageTransition>
+          <ProtectedRoute>
+            <PageTransition>
+              <SearchPage />
+            </PageTransition>
+          </ProtectedRoute>
+        } 
+      />
+      <Route 
+        path="/profile" 
+        element={
+          <ProtectedRoute>
+            <PageTransition>
+              <Profile />
+            </PageTransition>
+          </ProtectedRoute>
         } 
       />
       <Route 
         path="/settings" 
         element={
-          <PageTransition>
-            <Settings />
-          </PageTransition>
+          <ProtectedRoute>
+            <PageTransition>
+              <Settings />
+            </PageTransition>
+          </ProtectedRoute>
         } 
       />
       <Route 
