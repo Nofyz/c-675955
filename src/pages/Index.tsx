@@ -1,20 +1,11 @@
 
 import React from 'react';
-import { HeroSection } from '@/components/landing/HeroSection';
-import { FeatureSection } from '@/components/landing/FeatureSection';
-import { DesignSection } from '@/components/landing/DesignSection';
-import { ManageSection } from '@/components/landing/ManageSection';
-import { DeploySection } from '@/components/landing/DeploySection';
-import { SecuritySection } from '@/components/landing/SecuritySection';
-import { PricingSection } from '@/components/landing/PricingSection';
-import { TestimonialsSection } from '@/components/landing/TestimonialsSection';
-import { UseCasesSection } from '@/components/landing/UseCasesSection';
-import { StatisticsSection } from '@/components/landing/StatisticsSection';
-import { IntegrationShowcase } from '@/components/landing/IntegrationShowcase';
-import { BlogSection } from '@/components/landing/BlogSection';
-import { CommunitySection } from '@/components/landing/CommunitySection';
-import { FAQSection } from '@/components/landing/FAQSection';
-import { CallToAction } from '@/components/landing/CallToAction';
+import { CopyThiefHero } from '@/components/landing/CopyThiefHero';
+import { TrustedBySection } from '@/components/landing/TrustedBySection';
+import { EverythingYouNeedSection } from '@/components/landing/EverythingYouNeedSection';
+import { TestimonialsNewSection } from '@/components/landing/TestimonialsNewSection';
+import { PricingNewSection } from '@/components/landing/PricingNewSection';
+import { FooterSection } from '@/components/landing/FooterSection';
 import { LoadingScreen } from '@/components/landing/LoadingScreen';
 
 const Index = () => {
@@ -22,21 +13,12 @@ const Index = () => {
     <>
       <LoadingScreen />
       <div className="min-h-screen">
-        <HeroSection showTitle={true} />
-        <FeatureSection showFeatures={true} />
-        <UseCasesSection />
-        <DesignSection show={true} />
-        <ManageSection show={true} />
-        <StatisticsSection show={true} />
-        <IntegrationShowcase show={true} />
-        <DeploySection show={true} />
-        <SecuritySection show={true} />
-        <TestimonialsSection showTestimonials={true} />
-        <PricingSection showPricing={true} />
-        <BlogSection show={true} />
-        <CommunitySection show={true} />
-        <FAQSection />
-        <CallToAction show={true} />
+        <CopyThiefHero />
+        <TrustedBySection />
+        <EverythingYouNeedSection />
+        <TestimonialsNewSection />
+        <PricingNewSection />
+        <FooterSection />
       </div>
     </>
   );

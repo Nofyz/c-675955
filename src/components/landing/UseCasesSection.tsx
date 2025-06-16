@@ -4,8 +4,20 @@ import { AnimatedTransition } from '@/components/AnimatedTransition';
 import { useAnimateIn } from '@/lib/animations';
 import { useCases } from './UserCasesData';
 import { UseCaseProps } from './UseCasesTypes';
+import { Users, Palette, PenTool, Search, Code, Star } from 'lucide-react';
+
+const iconMap = {
+  Users: Users,
+  Palette: Palette,
+  PenTool: PenTool,
+  Search: Search,
+  Code: Code,
+  Star: Star
+};
 
 const UseCaseCard: React.FC<UseCaseProps> = ({ useCase, isActive, onClick }) => {
+  const IconComponent = iconMap[useCase.iconName as keyof typeof iconMap] || Star;
+  
   return (
     <div 
       className={`p-6 rounded-xl cursor-pointer transition-all duration-300 ${
@@ -14,7 +26,7 @@ const UseCaseCard: React.FC<UseCaseProps> = ({ useCase, isActive, onClick }) => 
       onClick={onClick}
     >
       <div className="flex items-center gap-3 mb-3">
-        {useCase.icon}
+        <IconComponent size={24} className="text-primary" />
         <h3 className="font-semibold">{useCase.title}</h3>
       </div>
       <p className="text-muted-foreground text-sm mb-4">{useCase.description}</p>
@@ -49,7 +61,7 @@ export const UseCasesSection: React.FC = () => {
             {useCases.map((useCase, index) => (
               <UseCaseCard
                 key={index}
-                useCase={useCase}
+                useCase={{...useCase, icon: null}}
                 isActive={activeCase === index}
                 onClick={() => setActiveCase(index)}
               />
